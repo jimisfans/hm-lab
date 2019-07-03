@@ -17,7 +17,13 @@ allprojects {
     group 'com.shecc.app'
 
     repositories {
+        mavenLocal()
         maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenCentral()
     }
+
+    dependencies {
+        compile "org.projectlombok:lombok:1.18.8"
+    }
+
 }
