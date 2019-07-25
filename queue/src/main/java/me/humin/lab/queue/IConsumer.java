@@ -8,4 +8,6 @@ public interface IConsumer {
 
     void subscribe(String topic, IMessageListener listener);
 
+    void unsubscribe(String topic);
+
 }

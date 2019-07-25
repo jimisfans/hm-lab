@@ -6,6 +6,6 @@ package me.humin.lab.queue;
  */
 public interface IMessageListener {
 
-
+    boolean consume(Message message);
 
 }

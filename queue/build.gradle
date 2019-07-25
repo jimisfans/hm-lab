@@ -1,6 +1,6 @@
 
 dependencies {
 
-    compile "com.alibaba.rocketmq:rocketmq-client:3.6.2.Final"
+    
 
 }
