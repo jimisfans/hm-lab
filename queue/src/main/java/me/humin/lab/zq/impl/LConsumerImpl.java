@@ -20,7 +20,7 @@ public class LConsumerImpl implements IConsumer {
     }
 
     @Override
-    public final void unsubscribe(String topic) {
+    public void unsubscribe(String topic) {
         this.localQueue.unsubscribe(topic);
     }
 
