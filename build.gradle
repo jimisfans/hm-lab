@@ -24,6 +24,8 @@ allprojects {
 
     dependencies {
         compile "org.projectlombok:lombok:1.18.8"
+        
+        testCompile "junit:junit:4.9"
     }
 
 }

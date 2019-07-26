@@ -1,4 +1,4 @@
-package me.humin.lab.queue.exception;
+package me.humin.lab.zq.exception;
 
 /**
  * @author: humin

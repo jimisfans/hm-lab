@@ -1,4 +1,4 @@
-package me.humin.lab.queue;
+package me.humin.lab.zq;
 
 /**
  * @author: humin
