@@ -1,11 +1,15 @@
 package me.humin.lab.zq.impl;
 
+import com.google.common.collect.Sets;
 import me.humin.lab.zq.IMessageListener;
 import me.humin.lab.zq.Message;
 import me.humin.lab.zq.exception.ZQException;
 import me.humin.lab.zq.util.ZQUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 
@@ -15,9 +19,11 @@ import java.util.concurrent.Executor;
  */
 public class LQueue {
 
+    private static Logger logger = LoggerFactory.getLogger(LQueue.class);
+
     private Executor executor;
 
-    private Map<String, IMessageListener> subscribeMap = new ConcurrentHashMap<>();
+    private Map<String, Set<IMessageListener>> subscribeMap = new ConcurrentHashMap<>();
 
     public void setExecutor(Executor executor) {
         this.executor = executor;
@@ -27,14 +33,21 @@ public class LQueue {
         if (ZQUtil.isEmpty(topic)) {
             throw new ZQException("topic is empty");
         }
-        subscribeMap.put(topic, listener);
+        if (listener == null) {
+            throw new ZQException("listener is null");
+        }
+        put(topic, listener);
     }
 
-    public void unsubscribe(String topic) {
+    public void unsubscribe(String topic, IMessageListener listener) {
         if (ZQUtil.isEmpty(topic)) {
             throw new ZQException("topic is empty");
         }
-        subscribeMap.remove(topic);
+        Set<IMessageListener> listenerSet = subscribeMap.get(topic);
+        listenerSet.remove(listener);
+        if (listenerSet.isEmpty()) {
+            subscribeMap.remove(topic);
+        }
     }
 
     public void send(Message message) {
@@ -45,10 +58,17 @@ public class LQueue {
         if (ZQUtil.isEmpty(topic)) {
             throw new ZQException("topic is empty");
         }
-        IMessageListener listener = subscribeMap.get(topic);
-        if (listener != null) {
-            executor.execute(()-> listener.consume(message));
+        Set<IMessageListener> listeners = subscribeMap.get(topic);
+        if (ZQUtil.isNotEmpty(listeners)) {
+            listeners.forEach(it -> {executor.execute(()-> it.consume(message));});
+        } else {
+            logger.warn("listener not found for topic:{}", topic);
         }
+    }
+
+    private void put(String topic, IMessageListener listener) {
+        Set<IMessageListener> listeners = subscribeMap.computeIfAbsent(topic, k -> Sets.newConcurrentHashSet());
+        listeners.add(listener);
     }
 
 }

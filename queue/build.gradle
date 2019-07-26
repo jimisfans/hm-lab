@@ -1,6 +1,7 @@
 
 dependencies {
 
-    
+    compile "org.slf4j:slf4j-api:1.7.26"
+    compile "com.google.guava:guava:28.0-jre"
 
 }
