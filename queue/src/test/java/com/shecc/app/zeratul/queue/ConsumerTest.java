@@ -1,11 +1,11 @@
-package me.humin.lab.zq;
+package com.shecc.app.zeratul.queue;
 
-import me.humin.lab.zq.bean.LConsumerBean;
-import me.humin.lab.zq.bean.LProducerBean;
-import me.humin.lab.zq.impl.LConsumerImpl;
-import me.humin.lab.zq.bean.LMessage;
-import me.humin.lab.zq.impl.LProducerImpl;
-import me.humin.lab.zq.impl.LQueue;
+import com.shecc.app.zeratul.queue.bean.LConsumerBean;
+import com.shecc.app.zeratul.queue.bean.LProducerBean;
+import com.shecc.app.zeratul.queue.impl.LConsumerImpl;
+import com.shecc.app.zeratul.queue.bean.LMessage;
+import com.shecc.app.zeratul.queue.impl.LProducerImpl;
+import com.shecc.app.zeratul.queue.impl.LQueue;
 import org.junit.Test;
 
 import java.util.concurrent.Executor;
@@ -17,9 +17,9 @@ import java.util.concurrent.Executors;
  */
 public class ConsumerTest {
 
-    private LProducerBean<LQBean> producer;
+    private LProducerBean producer;
 
-    private LConsumerBean<LQBean> consumer;
+    private LConsumerBean consumer;
 
     @Test
     public void test() {
@@ -40,18 +40,18 @@ public class ConsumerTest {
         consumer = initConsumer(queue);
     }
 
-    private LProducerBean<LQBean> initProducer(LQueue queue) {
+    private LProducerBean initProducer(LQueue queue) {
         LProducerImpl producer = new LProducerImpl();
         producer.setLocalQueue(queue);
-        LProducerBean<LQBean> res = new LProducerBean<>();
+        LProducerBean res = new LProducerBean();
         res.setProducer(producer);
         return res;
     }
 
-    private LConsumerBean<LQBean> initConsumer(LQueue queue) {
+    private LConsumerBean initConsumer(LQueue queue) {
         LConsumerImpl consumer = new LConsumerImpl();
         consumer.setLocalQueue(queue);
-        LConsumerBean<LQBean> res = new LConsumerBean<>();
+        LConsumerBean res = new LConsumerBean();
         res.setConsumer(consumer);
         return res;
     }

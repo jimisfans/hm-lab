@@ -1,10 +1,10 @@
-package me.humin.lab.zq.impl;
+package com.shecc.app.zeratul.queue.impl;
 
 import com.google.common.collect.Sets;
-import me.humin.lab.zq.IMessageListener;
-import me.humin.lab.zq.Message;
-import me.humin.lab.zq.exception.ZQException;
-import me.humin.lab.zq.util.ZQUtil;
+import com.shecc.app.zeratul.queue.IMessageListener;
+import com.shecc.app.zeratul.queue.Message;
+import com.shecc.app.zeratul.queue.exception.ZQException;
+import com.shecc.app.zeratul.queue.util.ZQUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

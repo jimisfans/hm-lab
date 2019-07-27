@@ -1,8 +1,8 @@
-package me.humin.lab.zq.bean;
+package com.shecc.app.zeratul.queue.bean;
 
+import com.shecc.app.zeratul.queue.Message;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import me.humin.lab.zq.Message;
 
 /**
  * @author: humin

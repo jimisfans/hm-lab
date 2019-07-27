@@ -1,4 +1,4 @@
-package me.humin.lab.zq.exception;
+package com.shecc.app.zeratul.queue.exception;
 
 /**
  * @author: humin

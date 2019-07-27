@@ -1,9 +1,9 @@
-package me.humin.lab.zq.impl;
+package com.shecc.app.zeratul.queue.impl;
 
-import me.humin.lab.zq.IConsumer;
-import me.humin.lab.zq.IMessageListener;
-import me.humin.lab.zq.exception.ZQException;
-import me.humin.lab.zq.util.ZQUtil;
+import com.shecc.app.zeratul.queue.IConsumer;
+import com.shecc.app.zeratul.queue.IMessageListener;
+import com.shecc.app.zeratul.queue.exception.ZQException;
+import com.shecc.app.zeratul.queue.util.ZQUtil;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,9 +19,13 @@ public class LConsumerImpl implements IConsumer {
     private Map<String, IMessageListener> listenerMap = new ConcurrentHashMap<>();
 
     public void setLocalQueue(LQueue localQueue) {
+        if (localQueue == null) {
+            throw new ZQException("queue is null");
+        }
         this.localQueue = localQueue;
     }
 
+    @Override
     public void subscribe(String topic, IMessageListener listener) {
         if (this.localQueue == null) {
             throw new ZQException("queue is null");

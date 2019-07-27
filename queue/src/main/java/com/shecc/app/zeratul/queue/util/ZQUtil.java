@@ -1,4 +1,4 @@
-package me.humin.lab.zq.util;
+package com.shecc.app.zeratul.queue.util;
 
 import java.util.Collection;
 
@@ -23,4 +23,7 @@ public class ZQUtil {
     public static boolean isNotEmpty(Collection var) {
         return var != null && var.size() > 0;
     }
+
+
+
 }

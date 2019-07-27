@@ -1,14 +1,14 @@
-package me.humin.lab.zq.bean;
+package com.shecc.app.zeratul.queue.bean;
 
-import me.humin.lab.zq.IConsumer;
-import me.humin.lab.zq.IMessageListener;
-import me.humin.lab.zq.exception.ZQException;
+import com.shecc.app.zeratul.queue.IConsumer;
+import com.shecc.app.zeratul.queue.IMessageListener;
+import com.shecc.app.zeratul.queue.exception.ZQException;
 
 /**
  * @author: humin
  * @date: 2019-07-26
  */
-public class LConsumerBean<T> {
+public class LConsumerBean {
 
     private IConsumer consumer;
 
@@ -16,10 +16,10 @@ public class LConsumerBean<T> {
         this.consumer = consumer;
     }
 
-    public void subscribe(String topic, LMessageListener<T> lListener) {
+    public void subscribe(String topic, LMessageListener lListener) {
         IMessageListener listener = message -> {
             if (message instanceof LMessage) {
-                return lListener.consume((LMessage<T>) message);
+                return lListener.consume((LMessage) message);
             } else {
                 throw new ZQException("wrong message type");
             }

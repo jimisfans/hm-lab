@@ -1,4 +1,4 @@
-package me.humin.lab.zq;
+package com.shecc.app.zeratul.queue;
 
 import lombok.Builder;
 import lombok.Data;

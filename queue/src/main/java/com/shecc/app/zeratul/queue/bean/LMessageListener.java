@@ -1,4 +1,4 @@
-package me.humin.lab.zq.bean;
+package com.shecc.app.zeratul.queue.bean;
 
 /**
  * @author: humin

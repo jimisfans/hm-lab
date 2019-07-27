@@ -1,7 +1,7 @@
-package me.humin.lab.zq;
+package com.shecc.app.zeratul.queue;
 
-import me.humin.lab.zq.bean.LMessage;
-import me.humin.lab.zq.bean.LMessageListener;
+import com.shecc.app.zeratul.queue.bean.LMessage;
+import com.shecc.app.zeratul.queue.bean.LMessageListener;
 
 /**
  * @author: humin

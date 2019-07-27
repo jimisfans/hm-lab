@@ -1,8 +1,8 @@
-package me.humin.lab.zq.impl;
+package com.shecc.app.zeratul.queue.impl;
 
-import me.humin.lab.zq.IProducer;
-import me.humin.lab.zq.Message;
-import me.humin.lab.zq.exception.ZQException;
+import com.shecc.app.zeratul.queue.IProducer;
+import com.shecc.app.zeratul.queue.Message;
+import com.shecc.app.zeratul.queue.exception.ZQException;
 
 /**
  * @author: humin
@@ -13,7 +13,7 @@ public class LProducerImpl implements IProducer {
     private LQueue localQueue;
 
     public void setLocalQueue(LQueue localQueue) {
-        if (this.localQueue == null) {
+        if (localQueue == null) {
             throw new ZQException("queue is null");
         }
         this.localQueue = localQueue;
