@@ -1,12 +1,11 @@
 package me.humin.guava.cache;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.Weigher;
+import com.google.common.cache.*;
 import org.junit.Test;
 
 import java.time.Duration;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -18,13 +17,27 @@ public class CacheTest {
     @Test
     public void test() throws Exception {
 //        expireWriteTest();
-        expireAccessTest();
+//        expireAccessTest();
 //        maxWeightTest();
 
 //        maxSizeTest(20);
 //        maxSizeTest(50);
 //        maxSizeTest(100);
+        listener();
 
+    }
+
+    private void listener() throws InterruptedException {
+        Cache<String, CacheMeta> cache = CacheBuilder.newBuilder()
+                .removalListener((RemovalListener<String, CacheMeta>) notification -> {
+                    System.out.println(notification.getCause());
+                    System.out.println(notification.getKey());
+                    System.out.println(notification.getValue());
+                })
+                .build();
+        cache.put("1", CacheMeta.builder().obj("test1").build());
+        cache.put("1", CacheMeta.builder().obj("test2").build());
+        cache.invalidate("1");
     }
 
     public void expireWriteTest() throws InterruptedException {
@@ -45,6 +58,12 @@ public class CacheTest {
                 .expireAfterAccess(Duration.ofMillis(1000))
                 .build();
         cache.put("1", CacheMeta.builder().obj("1").build());
+        try {
+            String key = "2";
+            cache.get(key, () -> CacheMeta.builder().obj(key).build());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         Thread.sleep(900L);
         System.out.println(cache.getIfPresent("1"));
         Thread.sleep(900L);
